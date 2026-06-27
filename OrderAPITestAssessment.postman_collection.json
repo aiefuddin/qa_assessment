@@ -1,0 +1,285 @@
+{
+	"info": {
+		"_postman_id": "31f591fb-1569-4d0e-915c-c0cccac8823b",
+		"name": "Order API Test Assessment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "56213365"
+	},
+	"item": [
+		{
+			"name": "TC01 - Create Order Success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const body = pm.response.json();\r",
+							"\r",
+							"pm.test(\"store_id is correct\", () => {\r",
+							"    pm.expect(body.json.store_id).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"quantity is correct\", () => {\r",
+							"    pm.expect(body.json.items[0].quantity).to.eql(2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"size is Large\", () => {\r",
+							"    pm.expect(body.json.items[0].customizations.size).to.eql(\"Large\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"milk is Oat\", () => {\r",
+							"    pm.expect(body.json.items[0].customizations.milk).to.eql(\"Oat\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer valid-token",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"store_id\": 1,\r\n  \"items\": [\r\n    {\r\n      \"product_id\": 101,\r\n      \"quantity\": 2,\r\n      \"customizations\": {\r\n        \"size\": \"Large\",\r\n        \"milk\": \"Oat\"\r\n      }\r\n    }\r\n  ],\r\n  \"payment_method_id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://postman-echo.com/post",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC02 - No Authorization Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Authorization header is not sent\", function () {\r",
+							"    pm.expect(pm.request.headers.has(\"Authorization\")).to.be.false;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"store_id\": 1,\r\n  \"items\": [\r\n    {\r\n      \"product_id\": 101,\r\n      \"quantity\": 2,\r\n      \"customizations\": {\r\n        \"size\": \"Large\",\r\n        \"milk\": \"Oat\"\r\n      }\r\n    }\r\n  ],\r\n  \"payment_method_id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://postman-echo.com/post",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC06 - Empty Items Array",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const body = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Items array is empty\", function () {\r",
+							"    pm.expect(body.json.items.length).to.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer valid-token",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"store_id\": 1,\r\n  \"items\": [],\r\n  \"payment_method_id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://postman-echo.com/post",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC07 - Invalid Customization",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const body = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Customization is echoed correctly\", function () {\r",
+							"    pm.expect(body.json.items[0].customizations.size).to.eql(\"ExtraHuge\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer valid-token",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"store_id\": 1,\r\n  \"items\": [\r\n    {\r\n      \"product_id\": 101,\r\n      \"quantity\": 1,\r\n      \"customizations\": {\r\n        \"size\": \"ExtraHuge\",\r\n        \"milk\": \"Chocolate\"\r\n      }\r\n    }\r\n  ],\r\n  \"payment_method_id\": 1\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://postman-echo.com/post",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": ""
+		}
+	]
+}

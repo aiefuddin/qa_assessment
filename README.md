@@ -87,3 +87,27 @@ test/
 ## Trade-off
 
 The assessment requires selecting the **first visible product**. Since product images share the same resource ID, the test retrieves the matching elements and opens the first visible item.
+
+## API Test Execution
+
+### Tool
+- Postman
+- Newman
+
+### Endpoint
+https://postman-echo.com/post
+
+### Run Collection
+
+```bash
+newman run OrderAPITestAssessment.postman_collection.json
+```
+
+### Files
+
+- api-test-cases.md
+- OrderAPITestAssessment.postman_collection.json
+
+### Notes
+
+This assessment uses the Postman Echo API as per instructiosn. Expected production behaviors such as HTTP 400 and HTTP 401 are documented in the written test cases
