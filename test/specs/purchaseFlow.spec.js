@@ -12,9 +12,9 @@ const ReviewOrderPage = require('../pages/ReviewOrderPage');
 const CompleteOrderPage = require('../pages/CompleteOrderPage'); 
 
 
-describe('Navigation Drawer', () => {
+describe('Single purchase', () => {
 
-    it('should open the navigation drawer', async () => {
+    it('User log in, add the first item in the catalog and complete order until confimration', async () => {
 
         await CatalogPage.openMenuDrawer();
         await MenuDrawer.goToLogin();

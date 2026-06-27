@@ -1,10 +1,10 @@
 {
   "name": "zus_assessment",
   "version": "1.0.0",
-  "description": "",
+  "description": "Native android application automation using WebdriverIO + appium",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "wdio run ./wdio.conf.js",
     "wdio": "wdio run ./wdio.conf.js"
   },
   "keywords": [],
