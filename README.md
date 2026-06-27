@@ -227,7 +227,7 @@ This assessment uses the Postman Echo API as per instructiosn. Expected producti
 
 ## Section 3 — Performance Testing Approach
 ### Deliverables
-- [API Test Cases](./perfTestApproach.md)
+- [Performance Testing Approach](./perfTestApproach.md)
 
 
 
