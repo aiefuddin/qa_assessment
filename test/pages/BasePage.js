@@ -7,6 +7,8 @@ class BasePage {
 
     async type(element, text) {
         await element.waitForDisplayed();
+        await element.waitForEnabled();
+        await element.clearValue(); //kalau test overlapped
         await element.setValue(text);
     }
 
