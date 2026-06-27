@@ -1,0 +1,22 @@
+# Node dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test reports
+reports/
+allure-results/
+allure-report/
