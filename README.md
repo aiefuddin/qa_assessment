@@ -1,7 +1,4 @@
 
-# Mobile Automation Assessment
-
-## Section 1 — Mobile UI Automation
 ### Overview
 
   
